@@ -1,8 +1,17 @@
 require "rake/testtask"
+require 'find'
 
 desc 'Say hello'
 task :hello do
   puts "Hello there. This is the 'hello' task."
+end
+
+desc 'list all files'
+task :list do
+  Find.find('.') do |name|
+    next if name.include?('/.')
+    puts name if File.file?(name)
+  end
 end
 
 desc 'Run tests'
